@@ -13,8 +13,20 @@ export default function LoginPage() {
 
     const handleLogin = async() => {
         try {
-            const { token, user} = 
-        }
-    }
+            const { token, user } = await loginUser(email, password);
+            login(token, user);
+          } catch (error) {
+            alert('Login failed');
+          }
+        };
+      
+        return (
+          <div>
+            <h1>Login</h1>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+            <button onClick={handleLogin}>Login</button>
+          </div>
+        );
 
 }
