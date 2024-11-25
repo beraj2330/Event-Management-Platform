@@ -11,3 +11,16 @@ export const loginUser = async (email: string, password: string) => {
     }
     return response.json(); // Returns token and user data
   };
+
+export const fetchProtectedData = async (token : string) => {
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/protected-route`, {
+    headers: { Authorization: `Bearer ${token}`},
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch protected data');
+  }
+
+  return response.json();
+}
