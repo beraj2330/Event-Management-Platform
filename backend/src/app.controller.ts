@@ -1,11 +1,13 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from './auth/roles.guard';
+import { SetMetadata } from '@nestjs/common';
 
-@Controller('app')
+@Controller()
 export class AppController {
-    @Get('protected-route')
-    @UseGuards(AuthGuard('jwt'))    //Protect this route using JWT
-    getProtectedData() {
-        return { message: 'This is protected data'};
-    }
+  @Get('admin')
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['admin']) // Only accessible to admin users
+  getAdminData() {
+    return { message: 'This is admin-only data.' };
+  }
 }
