@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { fetchProtectedData } from '@/utils/app';
+import { fetchProtectedData } from '@/utils/api';
 import { useAuth } from '@/context/AuthContext';
 
 export default function DashboardPage() {

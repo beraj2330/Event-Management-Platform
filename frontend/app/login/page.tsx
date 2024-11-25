@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { loginUser } from "@/utils/app";
+import { loginUser } from "@/utils/api";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
