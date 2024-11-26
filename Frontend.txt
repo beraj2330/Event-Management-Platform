@@ -1,0 +1,52 @@
+=> Files used = middleware.ts , api.ts , AuthContext.tsx , /login/page.tsx , /app/page.tsx , /app/layout.tsx
+
+=> Login Flow Overview:
+
+The user enters their credentials (email and password) on the LoginPage.
+The credentials are validated using custom validation logic (email format and password length).
+If validation passes, the loginUser function is called to send the login request to the backend.
+If the login is successful, the authentication token and user data are saved to localStorage and passed to the context via the login function.
+The context (AuthContext) holds the user's authentication state (user data and token) globally across the application.
+On successful login, the user is authenticated, and their session is stored in localStorage.
+
+=> File Breakdown:
+
+app/layout.tsx:
+
+This file is responsible for wrapping the entire application with the AuthProvider. The AuthProvider component manages the authentication state and makes it available throughout the app.
+It also includes the <Head> component for setting up meta information like the title for the platform.
+context/AuthContext.tsx:
+
+This file defines and exports the AuthContext and AuthProvider component.
+AuthContext holds the authentication state (user and token) and provides functions for logging in and logging out.
+AuthProvider is used in layout.tsx to wrap the application and provide authentication context to the app. It also loads the user and token from localStorage during the initial render.
+useAuth is a custom hook that allows any component to access the authentication context (e.g., checking if the user is logged in, logging out, etc.).
+app/login/page.tsx:
+
+This page renders the login form where users can input their email and password.
+The form inputs are controlled via state (email, password).
+Custom validation is performed on the form inputs to ensure valid data (e.g., valid email format, password length).
+Upon successful form submission, loginUser (from utils/api.ts) is called to authenticate the user via the backend.
+On success, the authentication token and user data are stored in the context and localStorage, allowing the user to remain logged in across sessions.
+utils/api.ts:
+
+Contains the loginUser function, which sends the login request to the backend.
+This function calls the backend’s /auth/login endpoint with the user's email and password, and expects a response with a token and user data.
+On success, the response is returned (token and user data), which is then used to update the authentication context.
+
+=> Login Flow Sequence
+LoginPage (page.tsx): User enters their email and password and submits the form.
+
+Form validation is triggered.
+If validation passes, loginUser is called.
+Login Request:
+
+loginUser (in utils/api.ts) sends a request to the backend /auth/login endpoint with the credentials.
+On success, the backend returns a JWT token and user data.
+AuthContext (AuthContext.tsx):
+
+The token and user data are stored in localStorage and passed into the AuthContext using the login function.
+The global authentication state (user, token) is updated, making the user logged in.
+App Layout (layout.tsx):
+
+All components in the app have access to the authentication state through the AuthContext.
