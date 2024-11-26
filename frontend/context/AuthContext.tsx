@@ -1,4 +1,4 @@
-//   context/AuthContex.tsx
+//   frontend/context/AuthContex.tsx
 import React, {createContext, useState, useEffect, useContext} from "react";
 
 interface AuthContextType {

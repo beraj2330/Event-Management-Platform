@@ -1,4 +1,4 @@
-// utils/api.ts
+// frontend/utils/api.ts
 export const loginUser = async (email: string, password: string) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
