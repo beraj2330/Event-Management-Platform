@@ -1,3 +1,4 @@
+// backend/src/user/user.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from "typeorm";
 import { IsEmail, IsString, MinLength } from "class-validator";
 import * as bcrypt from 'bcryptjs';
